@@ -35,7 +35,12 @@ app.use((req, res, next) => {
 
 app.use(
   cors({
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    allowedHeaders: [
+      'Content-Type',
+      'Authorization',
+      'Access-Control-Allow-Origin',
+      'Access-Control-Allow-Headers',
+    ],
   })
 );
 
