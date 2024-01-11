@@ -35,7 +35,11 @@ app.use((req, res, next) => {
 
 app.use(
   cors({
-    origin: '*',
+    origin: [
+      'Access-Control-Allow-Origin',
+      '*',
+      'https://note-server.netlify.app/',
+    ],
     credentials: true,
     optionSuccessStatus: 200,
     allowedHeaders: [
