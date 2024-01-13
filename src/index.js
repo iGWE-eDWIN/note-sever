@@ -14,7 +14,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Serveriseide configuration for  cross-origin HTTP request (CORS)
 app.use((req, res, next) => {
   // Allow requests from any origin
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  // res.setHeader(
+  //   'Access-Control-Allow-Origin',
+  //   '*',
+  //   'https://note-server.netlify.app/'
+  // );
   // Allow the following HTTP methods
   res.setHeader(
     'Access-Control-Allow-Methods',
@@ -33,23 +37,23 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(
-  cors({
-    origin: [
-      'Access-Control-Allow-Origin',
-      '*',
-      'https://note-server.netlify.app/',
-    ],
-    credentials: true,
-    optionSuccessStatus: 200,
-    allowedHeaders: [
-      'Content-Type',
-      'Authorization',
-      // 'Access-Control-Allow-Origin',
-      'Access-Control-Allow-Headers',
-    ],
-  })
-);
+// app.use(
+//   cors({
+//     origin: [
+//       'Access-Control-Allow-Origin',
+//       '*',
+//       'https://note-server.netlify.app/',
+//     ],
+//     credentials: true,
+//     optionSuccessStatus: 200,
+//     allowedHeaders: [
+//       'Content-Type',
+//       'Authorization',
+//       // 'Access-Control-Allow-Origin',
+//       'Access-Control-Allow-Headers',
+//     ],
+//   })
+// );
 
 // const cors=require("cors");
 // const corsOptions ={
@@ -59,6 +63,25 @@ app.use(
 // }
 
 // app.use(cors(corsOptions))
+
+const allowedOrigins = [
+  '*',
+  'https://note-server.netlify.app',
+  'locahost:3000',
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // Check if the origin is in the allowedOrigins array or if it's a valid CORS preflight request
+      if (!origin || allowedOrigins.includes(origin) || origin === 'null') {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+  })
+);
 
 // Register routers
 app.use(userRouter);
