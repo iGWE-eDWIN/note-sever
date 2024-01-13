@@ -14,11 +14,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Serveriseide configuration for  cross-origin HTTP request (CORS)
 app.use((req, res, next) => {
   // Allow requests from any origin
-  // res.setHeader(
-  //   'Access-Control-Allow-Origin',
-  //   '*',
-  //   'https://note-server.netlify.app/'
-  // );
+  res.header(
+    'Access-Control-Allow-Origin',
+    '*',
+    'https://note-server.netlify.app'
+  );
   // Allow the following HTTP methods
   res.setHeader(
     'Access-Control-Allow-Methods',
@@ -64,24 +64,24 @@ app.use((req, res, next) => {
 
 // app.use(cors(corsOptions))
 
-const allowedOrigins = [
-  '*',
-  'https://note-server.netlify.app',
-  'locahost:3000',
-];
+// const allowedOrigins = [
+//   '*',
+//   'https://note-server.netlify.app',
+//   'locahost:3000',
+// ];
 
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      // Check if the origin is in the allowedOrigins array or if it's a valid CORS preflight request
-      if (!origin || allowedOrigins.includes(origin) || origin === 'null') {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
-    },
-  })
-);
+// app.use(
+//   cors({
+//     origin: function (origin, callback) {
+//       // Check if the origin is in the allowedOrigins array or if it's a valid CORS preflight request
+//       if (!origin || allowedOrigins.includes(origin) || origin === 'null') {
+//         callback(null, true);
+//       } else {
+//         callback(new Error('Not allowed by CORS'));
+//       }
+//     },
+//   })
+// );
 
 // Register routers
 app.use(userRouter);
