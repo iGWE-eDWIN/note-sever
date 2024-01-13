@@ -14,17 +14,24 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Serveriseide configuration for  cross-origin HTTP request (CORS)
 app.use((req, res, next) => {
   // Allow requests from any origin
-  res.header(
-    'Access-Control-Allow-Origin',
-    '*',
-    'https://note-server.netlify.app'
-  );
+  // res.setHeader(
+  //   'Access-Control-Allow-Origin',
+  //   '*',
+  //   'https://note-server.netlify.app/'
+  // );
   // Allow the following HTTP methods
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH');
+  res.setHeader(
+    'Access-Control-Allow-Methods',
+    'GET, POST, PUT, DELETE, PATCH'
+  );
   // Allow the following headers
-  res.header('Access-Control-Allow-Headers', 'Content-Type', 'Authorization');
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'Content-Type',
+    'Authorization'
+  );
   // Allow credentials (if needed)
-  res.header('Access-Control-Allow-Credentials', 'true');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
 
   // Continue with the request
   next();
@@ -57,24 +64,24 @@ app.use((req, res, next) => {
 
 // app.use(cors(corsOptions))
 
-// const allowedOrigins = [
-//   '*',
-//   'https://note-server.netlify.app',
-//   'locahost:3000',
-// ];
+const allowedOrigins = [
+  '*',
+  'https://note-server.netlify.app',
+  'locahost:3000',
+];
 
-// app.use(
-//   cors({
-//     origin: function (origin, callback) {
-//       // Check if the origin is in the allowedOrigins array or if it's a valid CORS preflight request
-//       if (!origin || allowedOrigins.includes(origin) || origin === 'null') {
-//         callback(null, true);
-//       } else {
-//         callback(new Error('Not allowed by CORS'));
-//       }
-//     },
-//   })
-// );
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // Check if the origin is in the allowedOrigins array or if it's a valid CORS preflight request
+      if (!origin || allowedOrigins.includes(origin) || origin === 'null') {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+  })
+);
 
 // Register routers
 app.use(userRouter);
