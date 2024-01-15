@@ -70,16 +70,18 @@ const allowedOrigins = [
   // 'locahost:3000',
 ];
 
+// origin: function (origin, callback) {
+//   // Check if the origin is in the allowedOrigins array or if it's a valid CORS preflight request
+//   if (!origin || allowedOrigins.includes(origin) || origin === 'null') {
+//     callback(null, true);
+//   } else {
+//     callback(new Error('Not allowed by CORS'));
+//   }
+// },
+
 app.use(
   cors({
-    origin: function (origin, callback) {
-      // Check if the origin is in the allowedOrigins array or if it's a valid CORS preflight request
-      if (!origin || allowedOrigins.includes(origin) || origin === 'null') {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
-    },
+    origin: ['*'],
     allowedHeaders: [
       'Content-Type',
       'Authorization',
