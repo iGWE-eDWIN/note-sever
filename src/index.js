@@ -81,7 +81,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(
   cors({
-    origin: ['*', 'Access-Control-Allow-Origin'],
+    origin: '*',
     allowedHeaders: [
       'Content-Type',
       'Authorization',
