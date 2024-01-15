@@ -64,11 +64,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // app.use(cors(corsOptions))
 
-const allowedOrigins = [
-  '*',
-  // 'https://note-server.netlify.app',
-  // 'locahost:3000',
-];
+// const allowedOrigins = [
+//   '*',
+//   // 'https://note-server.netlify.app',
+//   // 'locahost:3000',
+// ];
 
 // origin: function (origin, callback) {
 //   // Check if the origin is in the allowedOrigins array or if it's a valid CORS preflight request
@@ -81,7 +81,7 @@ const allowedOrigins = [
 
 app.use(
   cors({
-    origin: ['*'],
+    origin: ['*', 'Access-Control-Allow-Origin'],
     allowedHeaders: [
       'Content-Type',
       'Authorization',
