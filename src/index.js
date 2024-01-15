@@ -12,30 +12,30 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Serveriseide configuration for  cross-origin HTTP request (CORS)
-app.use((req, res, next) => {
-  // Allow requests from any origin
-  // res.setHeader(
-  //   'Access-Control-Allow-Origin',
-  //   '*',
-  //   'https://note-server.netlify.app/'
-  // );
-  // Allow the following HTTP methods
-  res.setHeader(
-    'Access-Control-Allow-Methods',
-    'GET, POST, PUT, DELETE, PATCH'
-  );
-  // Allow the following headers
-  res.setHeader(
-    'Access-Control-Allow-Headers',
-    'Content-Type',
-    'Authorization'
-  );
-  // Allow credentials (if needed)
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
+// app.use((req, res, next) => {
+// Allow requests from any origin
+// res.setHeader(
+//   'Access-Control-Allow-Origin',
+//   '*',
+//   'https://note-server.netlify.app/'
+// );
+// Allow the following HTTP methods
+//   res.setHeader(
+//     'Access-Control-Allow-Methods',
+//     'GET, POST, PUT, DELETE, PATCH'
+//   );
+//   // Allow the following headers
+//   res.setHeader(
+//     'Access-Control-Allow-Headers',
+//     'Content-Type',
+//     'Authorization'
+//   );
+//   // Allow credentials (if needed)
+//   res.setHeader('Access-Control-Allow-Credentials', 'true');
 
-  // Continue with the request
-  next();
-});
+//   // Continue with the request
+//   next();
+// });
 
 // app.use(
 //   cors({
@@ -66,8 +66,8 @@ app.use((req, res, next) => {
 
 const allowedOrigins = [
   '*',
-  'https://note-server.netlify.app',
-  'locahost:3000',
+  // 'https://note-server.netlify.app',
+  // 'locahost:3000',
 ];
 
 app.use(
@@ -80,6 +80,13 @@ app.use(
         callback(new Error('Not allowed by CORS'));
       }
     },
+    allowedHeaders: [
+      'Content-Type',
+      'Authorization',
+      'Access-Control-Allow-Headers',
+    ],
+    methods: ['Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH'],
+    credentials: ['Access-Control-Allow-Credentials', 'true'],
   })
 );
 
