@@ -74,6 +74,7 @@ router.post('/users/logout', auth, async (req, res) => {
 // logout all
 router.post('/users/logoutAll', auth, async (req, res) => {
   try {
+    res.set('Access-Control-Allow-Origin', '*');
     req.user.tokens = [];
     await req.user.save();
     res.send();
